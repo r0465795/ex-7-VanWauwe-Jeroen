@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script type="text/Javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script>
+         
+         var service = 'https://web-ims.thomasmore.be/datadistribution/API/1.0';
+
+$(document).ready(function(){
+
+    jQuery.support.cors = true;
+
+    $.ajax(
+    {
+        type: "GET",
+        url: service + '/drones',
+        //data: "{}",
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        cache: false,
+        success: function (data) {
+            
+        var trHTML = '';
+                
+        $.each(data.drone, function (i, item) {
+            
+            trHTML += '<tr><td>' + item + '</td><td>' + data.id[i] + '</td></tr>';
+        });
+        
+        $('#Drones').append(trHTML);
+        
+        },
+        
+        error: function (msg) {
+            
+            alert(msg.responseText);
+        }
+    });
+})
+         
+        </script>
+    </head>
+    <body>
+        <div>TODO write content</div>
+        <table id="Drones" border='1'>
+            <tr>
+                <th>Drone:Naam</th>
+                <th>Drone:Mac-adres</th>
+                <th>File:id</th>
+                <th>File:First record</th>
+                <th>File:Last record</th>
+            </tr>
+            
+            
+        </table>
+    </body>
+</html>
